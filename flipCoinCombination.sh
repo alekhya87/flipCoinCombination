@@ -1,4 +1,4 @@
-#!/bin/bash/
+#!/bin/bash/ 
 echo "flip Coin Combination"
 #usecase-1
 isHead=1
@@ -12,16 +12,16 @@ fi
 #usecase-2
 declare  -A  coin;
 
-coin[head]=0;
-coin[tail]=0;
+coin[heads]=0;
+coin[tails]=0;
 count=0;
 
 addtoDictionary(){
 if [ $1 -eq 0 ]
 then
-coin[head]=`expr ${coin[head]} + 1`;
+coin[heads]=`expr ${coin[heads]} + 1`;
 else
-coin[tail]=`expr ${coin[tail]} + 1`;
+coin[tails]=`expr ${coin[tails]} + 1`;
 fi
 }
 
@@ -32,11 +32,12 @@ addtoDictionary $flip;
 ((++count))
 done
 
-perhead=`expr ${coin[head]} \* 100`;
+perhead=`expr ${coin[heads]} \* 100`;
 perhead=`expr $perhead / 25`;
 pertail=`expr 100 - $perhead`;
 echo "percentage of heads is $perhead"
 echo "percentage of tails is $pertail"
+
 #usecase-3
 declare  -A  coin;
 
@@ -64,14 +65,14 @@ addtoDictionary $flip;
 ((++count))
 done
 
-perhead=`expr ${coin[headhead]} \* 100`;
-perhead=`expr $perhead / 25`;
-pertail=`expr ${coin[tailtail]} \* 100`;
-pertail=`expr $pertail / 25`;
+perheadhead=`expr ${coin[headhead]} \* 100`;
+perheadhead=`expr $perheadhead / 25`;
+pertailtail=`expr ${coin[tailtail]} \* 100`;
+pertailtail=`expr $pertailtail / 25`;
 perheadtail=`expr ${coin[headtail]} \* 100`;
 perheadtail=`expr $perheadtail / 25`;
-echo "percentage of headhead is $perhead"
-echo "percentage of tailtail is $pertail"
+echo "percentage of headhead is $perheadhead"
+echo "percentage of tailtail is $pertailtail"
 echo "percentage of headtail is $perheadtail"
 #usecase-4
 declare  -A  coin;
@@ -116,3 +117,25 @@ echo "percentage of headheadhead is $perheadheadhead"
 echo "percentage of tailtailtail is $pertailtailtail"
 echo "percentage of headheadtail is $perheadheadtail"
 echo "percentage of headtailtail is $perheadtailtail"
+
+#usecase-5
+declare  -A  coinsort
+
+coinsort[1]=$perhead
+coinsort[2]=$pertail
+coinsort[3]=$perheadhead
+coinsort[4]=$pertailtail
+coinsort[5]=$perheadtail
+coinsort[6]=$perheadheadhead
+coinsort[7]=$pertailtailtail
+coinsort[8]=$perheadheadtail
+coinsort[9]=$perheadtailtail
+echo "dictionary :" ${coinsort[@]}
+variable=${coinsort[@]}
+for value in $variable
+do 
+	array+=($value)
+done
+	echo "array value are:" ${array[@]}
+sorting=`echo ${array[@]} | awk 'BEGIN{RS=" "} {print $1}' | sort -n `
+echo $sorting
